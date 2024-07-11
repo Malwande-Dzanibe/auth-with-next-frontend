@@ -3,31 +3,100 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  --main-color: #00b294;
+  --dark-pramary-color: rgb(31, 30, 30);
+  --light-primary-color: rgb(215, 215, 215);
+  --light-secondary-color: rgb(137, 132, 132);
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: var(--dark-pramary-color);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+nav {
+  background-color: var(--main-color);
+  min-height: 8vh;
+  width: 100%;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 90px;
+  align-items: center;
+  color: var(--dark-pramary-color);
+}
+
+.blue {
+  color: rgb(68, 68, 175);
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+.homie {
+  color: var(--light-secondary-color);
+  padding: 20px;
+}
+
+.buttons-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  background-color: var(--dark-pramary-color);
+  padding: 5px 30px;
+  border-radius: 50px;
+  color: var(--main-color);
+}
+
+/* .underline {
+  width: 10px;
+  height: 3px;
+  border-radius: 3px;
+  background-color: var(--dark-pramary-color);
+  margin: 0px auto;
+} */
+
+.mess {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  color: rgb(234, 21, 21);
+}
+
+.links-wrapper {
+  display: flex;
+}
+
+.link {
+  margin-left: 15px;
+}
+
+.link2 {
+  color: rgb(210, 202, 202);
+  margin-left: 15px;
+}
+
+.siggn {
+  background-color: var(--dark-pramary-color);
+  color: var(--main-color);
+  padding: 0px 10px;
+  margin-left: 15px;
+  border-radius: 50px;
+}
+
+form {
+  background-color: var(--main-color);
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 10px;
+}
+
+input {
+  margin: 10px 0px;
+  padding: 5px 3px;
 }
