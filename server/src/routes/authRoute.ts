@@ -36,7 +36,7 @@ router.post("/", async (req, res) => {
 
   if (tokenFromDB?.user.email !== email) {
     return res.status(401).json({
-      message: "Invalid OTP",
+      message: "Please double check your email address and OTP and try again",
     });
   }
 
@@ -56,8 +56,6 @@ router.post("/", async (req, res) => {
       user: true,
     },
   });
-
-  console.log(apiToken);
 
   const jwtoken = generateJWT(apiToken.id);
 
