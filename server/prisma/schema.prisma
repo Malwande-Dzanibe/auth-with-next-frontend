@@ -50,10 +50,4 @@ model Post {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-// {
-//   "email" :"madoda@gmail.com",
-//   "password" : "madoda11",
-//   "confirmpassword" : "madoda11",
-//   "name" : "Madoda",
-//   "surname" : "Mkhize"
-// }
+
