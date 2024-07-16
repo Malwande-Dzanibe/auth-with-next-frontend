@@ -7,22 +7,38 @@ const router = Router();
 const prisma = new PrismaClient();
 
 router.post("/", async (req, res) => {
-  const content = req.body.content;
+  const content: string = req.body.content;
 
   const auth = req.headers["authorization"];
 
   const jwtoken = auth?.split(" ")[1];
 
   // try {
-  //@ts-ignore
-  const payLoad = Jwt.verify(jwtoken, "secret");
+  if (!jwtoken) {
+    return res.sendStatus(401);
+  }
 
-  console.log(payLoad.id);
+  const payLoad = Jwt.verify(jwtoken, "secret") as {
+    id: string;
+  };
+
+  const apiToken = await prisma.token.findUnique({
+    where: {
+      id: payLoad.id,
+    },
+    include: {
+      user: true,
+    },
+  });
+
+  if (!apiToken?.isValid || apiToken.expiration < new Date()) {
+    return res.status(401).json({ message: "API token expired" });
+  }
 
   const tweet = await prisma.post.create({
     data: {
       content,
-      userId: "a10feba2-9fe9-44c4-8c10-0f7d8efbc5d7",
+      userId: apiToken?.user.id,
     },
     include: {
       user: true,
