@@ -1,8 +1,27 @@
-// import nodemailer from "nodemailer";
-import { Token, User } from "@prisma/client";
 import nodemailerTransporter from "./nodemailerTransporter";
 
-const sendEmails = (user: User, token: Token) => {
+const sendEmails = (
+  user: {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    name: string;
+    surname: string;
+    email: string;
+    password: string;
+    confirmpassword: string;
+  },
+  token: {
+    id: string;
+    userId: string;
+    createdAt: Date;
+    updatedAt: Date;
+    emailToken: string | null;
+    isValid: boolean;
+    type: string;
+    expiration: Date;
+  }
+) => {
   nodemailerTransporter().sendMail(
     {
       from: `"Malwande Dzanibe" <malwandedza@outlook.com>`,
