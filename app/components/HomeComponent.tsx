@@ -30,7 +30,7 @@ const HomeComponent = () => {
         >
           Click here
         </Link>
-        , to log in if you already have one
+        , to log in if you already have an account
       </h1>
     );
   }
