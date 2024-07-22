@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useContext, useEffect } from "react";
 import context from "../context/userContextWrapper";
 
-const page = () => {
+const LoginComponent = () => {
   const usingContext = useContext(context) as ContextType;
 
   const { sumbitLogin, updateLogin, logInError, logInLoading, setLogInError } =
@@ -48,4 +48,4 @@ const page = () => {
     </div>
   );
 };
-export default page;
+export default LoginComponent;

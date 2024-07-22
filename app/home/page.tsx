@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import context from "../context/userContextWrapper";
 import Link from "next/link";
 
-const page = () => {
+const HomeComponent = () => {
   const { user, dbToken } = useContext(context) as ContextType;
   const [users, setUsers] = useState<
     {
@@ -97,4 +97,4 @@ const page = () => {
     </div>
   );
 };
-export default page;
+export default HomeComponent;

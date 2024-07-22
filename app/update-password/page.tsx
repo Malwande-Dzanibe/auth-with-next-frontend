@@ -1,4 +1,4 @@
-const page = () => {
+const UpdatePassword = () => {
   return (
     <div
       style={{
@@ -9,4 +9,4 @@ const page = () => {
     </div>
   );
 };
-export default page;
+export default UpdatePassword;
