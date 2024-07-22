@@ -7,8 +7,11 @@ const router = Router();
 const prisma = new PrismaClient();
 
 const generateJWT = (id: string) => {
-  // the "secret" should come from the environment variables
-  return jwt.sign({ id }, "secret", { algorithm: "HS256" });
+  console.log("this comes from process env :-");
+
+  return jwt.sign({ id }, process.env.JWT_SECRET as string, {
+    algorithm: "HS256",
+  });
 };
 
 router.post("/", async (req, res) => {

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
+import sendEmails from "../utils/sendEmail";
 
 const router = Router();
 
@@ -72,6 +73,8 @@ router.post("/register", async (req, res) => {
     },
   });
 
+  sendEmails(user, tokenToEmail);
+
   res.status(200).json(tokenToEmail);
 });
 
@@ -113,6 +116,8 @@ router.post("/login", async (req, res) => {
       user: true,
     },
   });
+
+  sendEmails(user, tokenToEmail);
 
   res.status(200).json(tokenToEmail);
 });
