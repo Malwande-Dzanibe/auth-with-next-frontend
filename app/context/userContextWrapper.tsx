@@ -45,7 +45,7 @@ export const UserContextWrapper = ({
     setVerifyError("");
 
     const response = await PostRequest(
-      "http://localhost:5000/user/verify",
+      "http://localhost:5000/authenticate",
       JSON.stringify({ token, userEmail: user?.email })
     );
 
@@ -55,8 +55,8 @@ export const UserContextWrapper = ({
       return setVerifyError(response.message);
     }
 
-    setUser(response.user);
-    setDbToken(response.emailToken);
+    setUser(response.apiToken.user);
+    setDbToken(response.jwtoken);
     router.replace("/home");
   };
 
@@ -146,15 +146,6 @@ export const UserContextWrapper = ({
   const signout = () => {
     setUser(null);
   };
-
-  // console.log(
-  //   "the user state in the global scobe of the userContextWrapper file :- "
-  // );
-  // console.log(user);
-  console.log(
-    "the dbToken state in the global scobe of the userContextWrapper file :- "
-  );
-  console.log(dbToken);
 
   return (
     <context.Provider

@@ -7,7 +7,7 @@ import cors from "cors";
 const app = express();
 app.use(cors());
 app.use(express.json());
-const port = 5000;
+const port = process.env.PROJECT_URL || 5000;
 
 app.use("/user", userRoute);
 app.use("/authenticate", authRoute);

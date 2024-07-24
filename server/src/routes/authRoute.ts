@@ -7,16 +7,14 @@ const router = Router();
 const prisma = new PrismaClient();
 
 const generateJWT = (id: string) => {
-  console.log("this comes from process env :-");
-
-  return jwt.sign({ id }, process.env.JWT_SECRET as string, {
+  return jwt.sign({ id }, "cantseethis", {
     algorithm: "HS256",
   });
 };
 
 router.post("/", async (req, res) => {
-  const emailToken = req.body.emailToken;
-  const email = req.body.email;
+  const emailToken = req.body.token.emailToken;
+  const email = req.body.userEmail;
 
   const apiTokenExpiration = new Date(
     new Date().getTime() + 1000 * 60 * 60 * 24 * 30 * 6
@@ -62,7 +60,7 @@ router.post("/", async (req, res) => {
 
   const jwtoken = generateJWT(apiToken.id);
 
-  res.status(200).json({ jwtoken });
+  res.status(200).json({ jwtoken, apiToken });
 });
 
 export default router;

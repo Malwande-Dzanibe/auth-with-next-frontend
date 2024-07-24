@@ -8,9 +8,22 @@ import Link from "next/link";
 const HomeComponent = () => {
   const { user, dbToken } = useContext(context) as ContextType;
 
-  if (!user) {
+  console.log(
+    "this is the dbtoken coming from the HomeComponent in the compo :-"
+  );
+  console.log(dbToken);
+  console.log(
+    "this is the dbtoken coming from the HomeComponent int the compo:-"
+  );
+  console.log(user);
+
+  if (!user || !dbToken) {
     return (
-      <h1>
+      <h1
+        style={{
+          color: "gray",
+        }}
+      >
         <Link
           style={{
             color: "blue",
@@ -30,29 +43,19 @@ const HomeComponent = () => {
         >
           Click here
         </Link>
-        , to log in if you already have an account
+        , to log in if you already have one
       </h1>
     );
   }
 
-  if (!dbToken?.isValid) {
-    return (
-      <p>
-        <h1>
-          <Link
-            style={{
-              color: "blue",
-              textDecoration: "underline",
-            }}
-            href="/verify-email-token"
-          >
-            Click here
-          </Link>
-          , to verify your account
-        </h1>
-      </p>
-    );
-  }
+  return (
+    <div>
+      <h4 style={{ color: "red" }}>
+        Thank You For Verifying Your Account And Thank You For Visiting This
+        Demo Project{" "}
+      </h4>
+    </div>
+  );
 };
 
 export default HomeComponent;

@@ -21,12 +21,14 @@ router.post("/register", async (req, res) => {
   const emailToken = generateEmailToken();
 
   const expiration = new Date(new Date().getTime() + 1000 * 60 * 10);
-
+  console.log("we got to this point line 24");
   let user = await prisma.user.findUnique({
     where: {
       email,
     },
   });
+
+  console.log("we got to this point line 31");
 
   if (user) {
     return res.status(401).json({
