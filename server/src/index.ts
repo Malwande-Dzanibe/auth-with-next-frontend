@@ -7,7 +7,10 @@ import cors from "cors";
 const app = express();
 app.use(cors());
 app.use(express.json());
-const port = process.env.PROJECT_URL || 5000;
+
+// PROJECT_URL would come from an .env file in a real project
+const PROJECT_URL = "https://auth-with-next-frontend.vercel.app";
+const port = PROJECT_URL || 5000;
 
 app.use("/user", userRoute);
 app.use("/authenticate", authRoute);
