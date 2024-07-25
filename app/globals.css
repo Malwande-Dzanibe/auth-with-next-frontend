@@ -50,13 +50,27 @@ button {
   color: var(--main-color);
 }
 
-/* .underline {
-  width: 10px;
-  height: 3px;
-  border-radius: 3px;
-  background-color: var(--dark-pramary-color);
-  margin: 0px auto;
-} */
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+
+  min-width: 20px;
+  flex-direction: column;
+}
+
+.logo-wrapper p {
+  font-weight: bolder;
+}
+
+.on-nav {
+  font-size: 12px;
+}
+
+.log {
+  font-size: 12px;
+  background-color: yellow;
+}
 
 .mess {
   display: flex;
@@ -99,4 +113,10 @@ form {
 input {
   margin: 10px 0px;
   padding: 5px 3px;
+}
+
+@media (max-width: 960px) {
+  form {
+    width: 400px;
+  }
 }

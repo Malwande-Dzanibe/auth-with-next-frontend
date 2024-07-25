@@ -13,8 +13,4 @@ app.use("/user", userRoute);
 app.use("/authenticate", authRoute);
 app.use("/tweet", tweetRoute);
 
-app.get("/", (req, res) => {
-  res.status(200).json("hello world");
-});
-
 app.listen(port, () => console.log(`server listening at localhost:${port}`));

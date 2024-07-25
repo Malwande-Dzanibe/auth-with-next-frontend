@@ -14,9 +14,10 @@ const NavBar = () => {
 
   return (
     <nav>
-      <div className="logo-wrapper">
-        <Link href={"/"}>
-          <h1>Logo</h1>
+      <div>
+        <Link className="logo-wrapper" href={"/"}>
+          <p>Dzanibe </p>
+          <p>Media</p>
         </Link>
       </div>
       {user ? (
@@ -36,7 +37,7 @@ const NavBar = () => {
           </div>
           <div className={pathname == "/sign-up" ? "link2" : "siggn"}>
             <Link href={"/log-in"} onClick={() => signout()}>
-              Log Out
+              <p className="on-nav"> Log Out</p>
             </Link>
             {pathname == "/sign-up" ? <div className="underline"></div> : null}
           </div>
@@ -44,15 +45,21 @@ const NavBar = () => {
       ) : (
         <div className="links-wrapper">
           <div className={pathname == "/" ? "link2" : "link"}>
-            <Link href={"/"}>Home</Link>
+            <Link href={"/"}>
+              <p className="on-nav">Home</p>
+            </Link>
             {pathname == "/" ? <div className="underline"></div> : null}
           </div>
           <div className={pathname == "/log-in" ? "link2" : "link"}>
-            <Link href={"/log-in"}>Log In</Link>
+            <Link href={"/log-in"}>
+              <p className="on-nav">Log In</p>
+            </Link>
             {pathname == "/log-in" ? <div className="underline"></div> : null}
           </div>
           <div className={pathname == "/sign-up" ? "link2" : "siggn"}>
-            <Link href={"/sign-up"}>Create Account</Link>
+            <Link href={"/sign-up"}>
+              <p className="on-nav">Create Account</p>
+            </Link>
             {pathname == "/sign-up" ? <div className="underline"></div> : null}
           </div>
         </div>

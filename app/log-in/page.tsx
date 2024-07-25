@@ -38,7 +38,9 @@ const LoginComponent = () => {
           <p>Forgot password?</p>
         </Link>
         <section className="buttons-wrapper">
-          <button>{logInLoading ? "Logging In ..." : "Log In"}</button>
+          <button className="on-nav">
+            {logInLoading ? "Logging In ..." : "Log In"}
+          </button>
           <p>or</p>
           <Link className="blue" href={"/sign-up"}>
             Create Account

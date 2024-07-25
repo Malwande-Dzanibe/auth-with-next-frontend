@@ -22,6 +22,7 @@ const HomeComponent = () => {
       <h1
         style={{
           color: "gray",
+          fontSize: "12px",
         }}
       >
         <Link
@@ -33,7 +34,7 @@ const HomeComponent = () => {
         >
           Click here
         </Link>
-        , to register for an account. <br />
+        , to register an account. <br />
         <Link
           style={{
             color: "blue",
@@ -50,10 +51,11 @@ const HomeComponent = () => {
 
   return (
     <div>
-      <h4 style={{ color: "red" }}>
+      <h4 style={{ color: "red", fontSize: "12px" }}>
         Thank You For Verifying Your Account And Thank You For Visiting This
         Demo Project{" "}
       </h4>
+      <textarea placeholder="Leave a comment" />
     </div>
   );
 };

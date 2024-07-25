@@ -61,7 +61,7 @@ const SignUp = () => {
           onChange={(e) => updateRegister(e)}
         />
         <section className="buttons-wrapper">
-          <button>
+          <button className="on-nav">
             {registerLoading ? "Creating Account ..." : "Create Account"}
           </button>
           <p>or</p>
