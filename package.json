@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "verce-build": "echo hello"
+    "vercel-build": "echo hello"
   },
   "dependencies": {
     "@types/bcrypt": "^5.0.2",
