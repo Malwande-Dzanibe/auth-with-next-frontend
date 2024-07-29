@@ -7,8 +7,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  //url would come from an .env file in a real project
-  url      = "file:./dev.db"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -50,5 +49,6 @@ model Post {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
 
 

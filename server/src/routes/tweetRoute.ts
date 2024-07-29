@@ -18,8 +18,7 @@ router.post("/", async (req, res) => {
     return res.sendStatus(401);
   }
 
-  //  cantseethis would come from an .env file in a real project
-  const payLoad = Jwt.verify(jwtoken, "cantseethis") as {
+  const payLoad = Jwt.verify(jwtoken, process.env.JWT_SECRET as string) as {
     id: string;
   };
 

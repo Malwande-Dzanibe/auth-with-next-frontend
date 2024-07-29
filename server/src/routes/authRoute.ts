@@ -7,8 +7,7 @@ const router = Router();
 const prisma = new PrismaClient();
 
 const generateJWT = (id: string) => {
-  //  cantseethis would come from an .env file in a real project
-  return jwt.sign({ id }, "cantseethis", {
+  return jwt.sign({ id }, process.env.JWT_SECRET as string, {
     algorithm: "HS256",
   });
 };
