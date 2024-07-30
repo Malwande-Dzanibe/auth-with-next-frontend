@@ -8,15 +8,6 @@ import Link from "next/link";
 const HomeComponent = () => {
   const { user, dbToken } = useContext(context) as ContextType;
 
-  console.log(
-    "this is the dbtoken coming from the HomeComponent in the compo :-"
-  );
-  console.log(dbToken);
-  console.log(
-    "this is the dbtoken coming from the HomeComponent int the compo:-"
-  );
-  console.log(user);
-
   if (!user || !dbToken) {
     return (
       <h1
