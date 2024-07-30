@@ -11,6 +11,9 @@ export const UserContextWrapper = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
+  const apiUrl =
+    "https://testing-vercel-omega-seven.vercel.app" || "http://localhost:5000";
+
   const router = useRouter();
 
   const [user, setUser] = useState<UserType | null>(null);
@@ -45,7 +48,7 @@ export const UserContextWrapper = ({
     setVerifyError("");
 
     const response = await PostRequest(
-      "http://localhost:5000/authenticate",
+      `${apiUrl}/authenticate`,
       JSON.stringify({ token, userEmail: user?.email })
     );
 
@@ -69,7 +72,7 @@ export const UserContextWrapper = ({
     setLogInError("");
 
     const response = await PostRequest(
-      "http://localhost:5000/user/login",
+      `${apiUrl}/user/login`,
       JSON.stringify(logInInfo)
     );
 
@@ -93,7 +96,7 @@ export const UserContextWrapper = ({
     setRegisterError("");
 
     const response = await PostRequest(
-      "http://localhost:5000/user/register",
+      `${apiUrl}/user/register`,
       JSON.stringify(registerInfo)
     );
 
