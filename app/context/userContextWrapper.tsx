@@ -11,8 +11,8 @@ export const UserContextWrapper = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  const apiUrl =
-    "https://testing-vercel-omega-seven.vercel.app" || "http://localhost:5000";
+  const apiUrl = "https://testing-vercel-omega-seven.vercel.app";
+  // "https://testing-vercel-omega-seven.vercel.app" || "http://localhost:5000";
 
   const router = useRouter();
 
