@@ -106,6 +106,11 @@ export const UserContextWrapper = ({
       return setRegisterError(response.message);
     }
 
+    console.log(
+      "this is our response coming from https://testing-vercel-omega-seven.vercel.app/user/register :-"
+    );
+    console.log(response);
+
     setUser(response.user);
     setDbToken(response.emailToken);
     router.replace("/verify-email-token");
