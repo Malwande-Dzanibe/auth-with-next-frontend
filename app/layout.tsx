@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/NavBar";
 import { UserContextWrapper } from "./context/userContextWrapper";
+import { Head } from "next/document";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <a rel="icon" href="data: ,"></a>
+      </Head>
       <body className={inter.className}>
         <UserContextWrapper>
           <NavBar />
