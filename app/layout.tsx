@@ -19,9 +19,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <a rel="icon" href="data: ,"></a>
-      </Head>
       <body className={inter.className}>
         <UserContextWrapper>
           <NavBar />
