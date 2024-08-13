@@ -11,8 +11,8 @@ export const UserContextWrapper = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  const apiUrl = "https://testing-vercel-omega-seven.vercel.app";
-  // "https://testing-vercel-omega-seven.vercel.app" || "http://localhost:5000";
+  const apiUrl = "https://custom-auth-backend.vercel.app/";
+  // "https://custom-auth-backend.vercel.app/" || "http://localhost:5000";
 
   const router = useRouter();
 
@@ -48,7 +48,7 @@ export const UserContextWrapper = ({
     setVerifyError("");
 
     const response = await PostRequest(
-      `${apiUrl}/authenticate`,
+      `${apiUrl}api/v1/authenticate`,
       JSON.stringify({ token, userEmail: user?.email })
     );
 
@@ -72,7 +72,7 @@ export const UserContextWrapper = ({
     setLogInError("");
 
     const response = await PostRequest(
-      `${apiUrl}/user/login`,
+      `${apiUrl}api/v1/user/login`,
       JSON.stringify(logInInfo)
     );
 
@@ -96,7 +96,7 @@ export const UserContextWrapper = ({
     setRegisterError("");
 
     const response = await PostRequest(
-      `${apiUrl}/user/register`,
+      `${apiUrl}api/v1/user/register`,
       JSON.stringify(registerInfo)
     );
 
@@ -107,7 +107,7 @@ export const UserContextWrapper = ({
     }
 
     console.log(
-      "this is our response coming from https://testing-vercel-omega-seven.vercel.app/user/register :-"
+      "this is our response coming from https://custom-auth-backend.vercel.app/api/v1/user/register :-"
     );
     console.log(response);
 
