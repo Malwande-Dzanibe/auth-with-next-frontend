@@ -12,7 +12,7 @@ export const UserContextWrapper = ({
   children: React.ReactNode;
 }>) => {
   const apiUrl = "https://custom-auth-backend.vercel.app/";
-  // "https://custom-auth-backend.vercel.app/" || "http://localhost:5000";
+  // "https://custom-auth-backend.vercel.app/" || "http://localhost:5000/";
 
   const router = useRouter();
 
