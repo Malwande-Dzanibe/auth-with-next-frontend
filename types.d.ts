@@ -33,5 +33,12 @@ type ContextType = {
   updateVerify: (one: ChangeEvent<HTMLInputElement>) => void;
   verifyError: string;
   setVerifyError: Dispatch<SetStateAction<string>>;
-  dbToken: TokenType | null;
+  sendTweets: FormEvent<HTMLFormElement>;
+  updatePost: (one: ChangeEvent<HTMLInputElement>) => void;
+  setPostLoading: Dispatch<SetStateAction<boolean>>;
+  setTweetError: Dispatch<SetStateAction<string>>;
+  postLoading: boolean;
+  post: {
+    content: string;
+  };
 };

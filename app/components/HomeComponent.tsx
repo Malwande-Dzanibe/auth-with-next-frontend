@@ -1,14 +1,18 @@
 "use client";
 
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 // import { redirect } from "next/navigation";
 import context from "../context/userContextWrapper";
 import Link from "next/link";
 
 const HomeComponent = () => {
-  const { user, dbToken } = useContext(context) as ContextType;
+  const { user, sendTweets, updatePost, postLoading, post } = useContext(
+    context
+  ) as ContextType;
 
-  if (!user || !dbToken) {
+  const [loading, setLoading] = useState(false);
+
+  if (!user) {
     return (
       <h1
         style={{
@@ -46,7 +50,20 @@ const HomeComponent = () => {
         Thank You For Verifying Your Account And Thank You For Visiting This
         Demo Project{" "}
       </h4>
-      <textarea placeholder="Leave a comment" />
+      <form onSubmit={sendTweets}>
+        <textarea
+          placeholder="Leave a comment"
+          name="content"
+          required
+          value={post.content}
+          onChange={(e) => updatePost(e)}
+        />
+        <button type="submit">{postLoading ? "Posting..." : "Post"}</button>
+      </form>
+      <div className="tweets-wrapper">
+        {loading && <p>Loading...</p>}
+        <p>this is where the tweets are going to be </p>
+      </div>
     </div>
   );
 };

@@ -3,6 +3,7 @@
 import { ChangeEvent, FormEvent, createContext, useState } from "react";
 import { PostRequest } from "../utils/services";
 import { useRouter } from "next/navigation";
+import { SendTweet } from "../utils/sendTweet";
 
 const context = createContext<ContextType | null>(null);
 
@@ -17,13 +18,16 @@ export const UserContextWrapper = ({
   const router = useRouter();
 
   const [user, setUser] = useState<UserType | null>(null);
-  const [dbToken, setDbToken] = useState<TokenType | null>(null);
+  const [dbToken, setDbToken] = useState<string>("");
   const [registerInfo, setRegisterInfo] = useState({
     name: "",
     surname: "",
     email: "",
     password: "",
     confirmpassword: "",
+  });
+  const [post, setPost] = useState({
+    content: "",
   });
   const [logInInfo, setLogInInfo] = useState({
     email: "",
@@ -32,12 +36,14 @@ export const UserContextWrapper = ({
   const [logInError, setLogInError] = useState("");
   const [registerError, setRegisterError] = useState("");
   const [logInLoading, setLogInLoading] = useState(false);
+  const [postLoading, setPostLoading] = useState(false);
   const [registerLoading, setRegisterLoading] = useState(false);
   const [loadingVerify, setLoadingVerify] = useState(false);
   const [token, setToken] = useState({
     emailToken: "",
   });
   const [verifyError, setVerifyError] = useState("");
+  const [tweetError, setTweetError] = useState("");
 
   // verifying a user from the frontend
 
@@ -112,8 +118,32 @@ export const UserContextWrapper = ({
     console.log(response);
 
     setUser(response.user);
-    setDbToken(response.emailToken);
     router.replace("/verify-email-token");
+  };
+
+  // handle sending tweets
+
+  const sendTweets = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    setPostLoading(true);
+    setTweetError("");
+
+    const response = await SendTweet(
+      `${apiUrl}api/v1/tweet`,
+      JSON.stringify(post),
+      dbToken
+    );
+
+    setPost({
+      content: "",
+    });
+
+    setPostLoading(false);
+
+    if (response.error) {
+      return setTweetError(response.message);
+    }
   };
 
   // handling the verify inputs
@@ -149,6 +179,15 @@ export const UserContextWrapper = ({
     });
   };
 
+  const updatePost = (event: ChangeEvent<HTMLInputElement>) => {
+    setPost((prev) => {
+      return {
+        ...prev,
+        content: event.target.value,
+      };
+    });
+  };
+
   // signing out a user
 
   const signout = () => {
@@ -176,7 +215,12 @@ export const UserContextWrapper = ({
         updateVerify,
         verifyError,
         setVerifyError,
-        dbToken,
+        sendTweets,
+        updatePost,
+        setPostLoading,
+        setTweetError,
+        postLoading,
+        post,
       }}
     >
       {children}

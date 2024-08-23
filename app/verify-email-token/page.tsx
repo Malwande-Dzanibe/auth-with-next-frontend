@@ -12,7 +12,6 @@ const VerifyEmail = () => {
     verifyError,
     user,
     setVerifyError,
-    dbToken,
   } = useContext(context) as ContextType;
 
   useEffect(() => {

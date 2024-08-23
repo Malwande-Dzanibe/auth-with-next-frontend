@@ -115,6 +115,21 @@ input {
   padding: 5px 3px;
 }
 
+.tweets-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.tweets-wrapper p {
+  color: grey;
+  font-size: 12px;
+}
+
+.one-tweet {
+  margin: 10px;
+}
+
 @media (max-width: 960px) {
   form {
     width: 400px;
