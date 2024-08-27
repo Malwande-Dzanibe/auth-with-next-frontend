@@ -1,6 +1,12 @@
 "use client";
 
-import { ChangeEvent, FormEvent, createContext, useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  createContext,
+  useEffect,
+  useState,
+} from "react";
 import { PostRequest } from "../utils/services";
 import { useRouter } from "next/navigation";
 import { SendTweet } from "../utils/sendTweet";
@@ -15,10 +21,32 @@ export const UserContextWrapper = ({
   const apiUrl = "https://custom-auth-backend.vercel.app/";
   // "https://custom-auth-backend.vercel.app/" || "http://localhost:5000/";
 
+  const getUserLS = () => {
+    let result;
+    if (typeof window !== "undefined") {
+      result = localStorage.getItem("user");
+    } else if (result === undefined || result === null) {
+      result = null;
+    }
+
+    return result ? JSON.parse(result) : null;
+  };
+
+  const getdbTokenLS = () => {
+    let result;
+    if (typeof window !== "undefined") {
+      result = localStorage.getItem("dbToken");
+    } else if (result === undefined || result === null) {
+      result = "";
+    }
+
+    return result ? JSON.parse(result) : "";
+  };
+
   const router = useRouter();
 
-  const [user, setUser] = useState<UserType | null>(null);
-  const [dbToken, setDbToken] = useState<string>("");
+  const [user, setUser] = useState<UserType | null>(getUserLS());
+  const [dbToken, setDbToken] = useState<string>(getdbTokenLS());
   const [registerInfo, setRegisterInfo] = useState({
     name: "",
     surname: "",
@@ -192,7 +220,13 @@ export const UserContextWrapper = ({
 
   const signout = () => {
     setUser(null);
+    localStorage.removeItem("user");
   };
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("dbToken", JSON.stringify(dbToken));
+  }, [user]);
 
   return (
     <context.Provider

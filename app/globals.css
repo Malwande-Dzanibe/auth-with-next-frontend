@@ -117,7 +117,7 @@ input {
 
 .tweets-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   width: 100%;
 }
 
