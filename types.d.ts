@@ -41,4 +41,6 @@ type ContextType = {
   post: {
     content: string;
   };
+  tweetError: string;
+  dbToken: string;
 };

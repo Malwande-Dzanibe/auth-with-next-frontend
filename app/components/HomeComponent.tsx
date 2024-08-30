@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 // import { redirect } from "next/navigation";
 import context from "../context/userContextWrapper";
 import Link from "next/link";
+import Tweets from "./Tweets";
 
 type TweetType = {
   content: string;
@@ -15,9 +16,15 @@ type TweetType = {
 };
 
 const HomeComponent = () => {
-  const { user, sendTweets, updatePost, postLoading, post } = useContext(
-    context
-  ) as ContextType;
+  const {
+    user,
+    sendTweets,
+    updatePost,
+    postLoading,
+    post,
+    tweetError,
+    dbToken,
+  } = useContext(context) as ContextType;
 
   const [allTweets, setAllTweets] = useState<TweetType[]>([]);
   const [isClient, setIsClient] = useState(false);
@@ -44,6 +51,30 @@ const HomeComponent = () => {
   useEffect(() => {
     setIsClient(true);
   }, [isClient]);
+
+  if (user && !dbToken) {
+    return (
+      isClient && (
+        <h1
+          style={{
+            color: "gray",
+            fontSize: "12px",
+          }}
+        >
+          <Link
+            style={{
+              color: "blue",
+              textDecoration: "underline",
+            }}
+            href="/verify-email-token"
+          >
+            Click here
+          </Link>
+          , to verify your account.
+        </h1>
+      )
+    );
+  }
 
   if (!user) {
     return (
@@ -86,6 +117,11 @@ const HomeComponent = () => {
           Thank You For Verifying Your Account And Thank You For Visiting This
           Demo Project{" "}
         </h4>
+        {tweetError && (
+          <h4 style={{ color: "red", fontSize: "12px", textAlign: "center" }}>
+            {tweetError}
+          </h4>
+        )}
         <form onSubmit={sendTweets}>
           <textarea
             placeholder="Leave a comment"
@@ -96,18 +132,7 @@ const HomeComponent = () => {
           />
           <button type="submit">{postLoading ? "Posting..." : "Post"}</button>
         </form>
-        <div className="tweets-wrapper">
-          {allTweets.map((tweet) => {
-            return (
-              <div className="one-tweet" key={tweet.id}>
-                <h6 style={{ color: " #00b294", fontSize: "12px" }}>
-                  {tweet.user.name} {tweet.user.surname}
-                </h6>
-                <p>{tweet.content}</p>
-              </div>
-            );
-          })}
-        </div>
+        <Tweets allTweets={allTweets} />
       </div>
     )
   );

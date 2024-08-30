@@ -140,11 +140,6 @@ export const UserContextWrapper = ({
       return setRegisterError(response.message);
     }
 
-    console.log(
-      "this is our response coming from https://custom-auth-backend.vercel.app/api/v1/user/register :-"
-    );
-    console.log(response);
-
     setUser(response.user);
     router.replace("/verify-email-token");
   };
@@ -220,7 +215,7 @@ export const UserContextWrapper = ({
 
   const signout = () => {
     setUser(null);
-    localStorage.removeItem("user");
+    setDbToken("");
   };
 
   useEffect(() => {
@@ -255,6 +250,8 @@ export const UserContextWrapper = ({
         setTweetError,
         postLoading,
         post,
+        tweetError,
+        dbToken,
       }}
     >
       {children}
