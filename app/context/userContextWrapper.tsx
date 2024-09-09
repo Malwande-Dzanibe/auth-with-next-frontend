@@ -122,7 +122,7 @@ export const UserContextWrapper = ({
     router.replace("/verify-email-token");
   };
 
-  // creating a user from the frontend
+  // creating a user
 
   const submitRegister = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
