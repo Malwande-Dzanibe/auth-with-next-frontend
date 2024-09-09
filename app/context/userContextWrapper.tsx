@@ -72,6 +72,7 @@ export const UserContextWrapper = ({
   });
   const [verifyError, setVerifyError] = useState("");
   const [tweetError, setTweetError] = useState("");
+  const [check, setCheck] = useState("hey there");
 
   // verifying a user from the frontend
 
@@ -140,7 +141,10 @@ export const UserContextWrapper = ({
       return setRegisterError(response.message);
     }
 
-    setUser(response.user);
+    setUser(response.tokenToEmail.user);
+
+    setCheck(response.message);
+
     router.replace("/verify-email-token");
   };
 
@@ -252,6 +256,7 @@ export const UserContextWrapper = ({
         post,
         tweetError,
         dbToken,
+        check,
       }}
     >
       {children}

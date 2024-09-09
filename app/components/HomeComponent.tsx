@@ -29,9 +29,6 @@ const HomeComponent = () => {
   const [allTweets, setAllTweets] = useState<TweetType[]>([]);
   const [isClient, setIsClient] = useState(false);
 
-  console.log("it rendered outside");
-  console.log(allTweets);
-
   useEffect(() => {
     const getTweets = async () => {
       const response = await fetch(

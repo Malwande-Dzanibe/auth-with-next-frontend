@@ -43,4 +43,5 @@ type ContextType = {
   };
   tweetError: string;
   dbToken: string;
+  check: string;
 };

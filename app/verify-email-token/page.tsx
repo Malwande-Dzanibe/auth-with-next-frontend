@@ -12,6 +12,7 @@ const VerifyEmail = () => {
     verifyError,
     user,
     setVerifyError,
+    check,
   } = useContext(context) as ContextType;
 
   const [isClient, setIsClient] = useState(false);
@@ -63,6 +64,7 @@ const VerifyEmail = () => {
         <div className="mess">
           <p>{verifyError ? verifyError : null}</p>
         </div>
+        <p style={{ color: "white", textAlign: "center" }}>{check}</p>
         <form onSubmit={submitVerify}>
           <input
             type="text"
