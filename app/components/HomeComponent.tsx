@@ -37,8 +37,6 @@ const HomeComponent = () => {
 
       const data = await response.json();
 
-      console.log("it rendered inside");
-
       setAllTweets(data);
     };
 

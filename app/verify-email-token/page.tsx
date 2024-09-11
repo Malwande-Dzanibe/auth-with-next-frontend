@@ -64,7 +64,7 @@ const VerifyEmail = () => {
         <div className="mess">
           <p>{verifyError ? verifyError : null}</p>
         </div>
-        <p style={{ color: "white", textAlign: "center" }}>{check} logssssss</p>
+        <p style={{ color: "white", textAlign: "center" }}>{check}</p>
         <form onSubmit={submitVerify}>
           <input
             type="text"
