@@ -143,7 +143,7 @@ export const UserContextWrapper = ({
 
     setUser(response.tokenToEmail.user);
 
-    setCheck(`yes ${response.message}`);
+    setCheck(`yes ${response.eyy.message}`);
     console.log(response.message);
 
     router.replace("/verify-email-token");
