@@ -72,7 +72,7 @@ export const UserContextWrapper = ({
   });
   const [verifyError, setVerifyError] = useState("");
   const [tweetError, setTweetError] = useState("");
-  const [check, setCheck] = useState("hey there");
+  const [check, setCheck] = useState("");
 
   // verifying a user from the frontend
 
@@ -143,7 +143,7 @@ export const UserContextWrapper = ({
 
     setUser(response.tokenToEmail.user);
 
-    setCheck(response.message);
+    setCheck(`yes ${response.message}`);
     console.log(response.message);
 
     router.replace("/verify-email-token");
