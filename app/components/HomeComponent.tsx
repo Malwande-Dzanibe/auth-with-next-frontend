@@ -31,9 +31,9 @@ const HomeComponent = () => {
 
   useEffect(() => {
     const getTweets = async () => {
-      const response = await fetch(
-        "https://custom-auth-backend.vercel.app/api/v1/user/tweets"
-      );
+      const response = await fetch("http://localhost:5000/api/v1/user/tweets");
+
+      // "https://custom-auth-backend.vercel.app/" || "http://localhost:5000/";
 
       const data = await response.json();
 

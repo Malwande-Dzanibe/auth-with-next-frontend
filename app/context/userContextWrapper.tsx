@@ -24,7 +24,7 @@ export const UserContextWrapper = ({
   const getUserLS = () => {
     let result;
     if (typeof window !== "undefined") {
-      result = localStorage.getItem("user");
+      result = localStorage.getItem("user2");
     } else if (result === undefined || result === null) {
       result = null;
     }
@@ -93,7 +93,8 @@ export const UserContextWrapper = ({
       return setVerifyError(response.message);
     }
 
-    setUser(response.apiToken.user);
+    setUser(response.user);
+
     setDbToken(response.jwtoken);
     router.replace("/home");
   };
@@ -141,17 +142,10 @@ export const UserContextWrapper = ({
       return setRegisterError(response.message);
     }
 
-    setUser(response.tokenToEmail.user);
-
-    setCheck(`yes ${response.eyy.message}`);
-    console.log(response.message);
+    setUser(response.user);
 
     router.replace("/verify-email-token");
   };
-
-  console.log("below is the contents of check");
-
-  console.log(check);
 
   // handle sending tweets
 
@@ -228,7 +222,7 @@ export const UserContextWrapper = ({
   };
 
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("user2", JSON.stringify(user));
     localStorage.setItem("dbToken", JSON.stringify(dbToken));
   }, [user]);
 
