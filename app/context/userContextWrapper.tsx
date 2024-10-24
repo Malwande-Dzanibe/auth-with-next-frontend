@@ -93,7 +93,7 @@ export const UserContextWrapper = ({
       return setVerifyError(response.message);
     }
 
-    setUser(response.user);
+    setUser(response.apiToken.user);
 
     setDbToken(response.jwtoken);
     router.replace("/home");
