@@ -3,7 +3,7 @@ export const SendTweet = async (url: string, body: string, token: string) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer" + token,
+      Authorization: "Bearer" + " " + token,
     },
     body,
   });
