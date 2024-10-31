@@ -135,3 +135,17 @@ input {
     width: 400px;
   }
 }
+
+@media (max-width: 678px) {
+  nav {
+    background-color: var(--main-color);
+    min-height: 8vh;
+    width: 100%;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 15px;
+    align-items: center;
+    color: var(--dark-pramary-color);
+  }
+}
