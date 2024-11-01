@@ -3,7 +3,7 @@
 import { useContext } from "react";
 import context from "../context/userContextWrapper";
 
-const page = () => {
+const ConfirmPage = () => {
   const usingContext = useContext(context) as ContextType;
 
   const {
@@ -39,4 +39,4 @@ const page = () => {
     </div>
   );
 };
-export default page;
+export default ConfirmPage;
