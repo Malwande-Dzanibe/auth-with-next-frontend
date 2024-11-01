@@ -76,11 +76,9 @@ const VerifyEmail = () => {
           <Link className="blue" href={"/verify-email-token"}>
             <p>Resend Email Token?</p>
           </Link>
-          <section className="buttons-wrapper">
-            <button disabled={loadingVerify}>
-              {loadingVerify ? "Verifying ..." : "Verify"}
-            </button>
-          </section>
+          <button disabled={loadingVerify}>
+            {loadingVerify ? "Verifying ..." : "Verify"}
+          </button>
         </form>
       </div>
     )

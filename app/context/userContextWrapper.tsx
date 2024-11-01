@@ -43,6 +43,17 @@ export const UserContextWrapper = ({
     return result ? JSON.parse(result) : "";
   };
 
+  const getEmail2 = () => {
+    let result;
+    if (typeof window !== "undefined") {
+      result = localStorage.getItem("email2");
+    } else if (result === undefined || result === null) {
+      result = "";
+    }
+
+    return result ? JSON.parse(result) : "";
+  };
+
   const router = useRouter();
 
   const [user, setUser] = useState<UserType | null>(getUserLS());
@@ -73,6 +84,19 @@ export const UserContextWrapper = ({
   const [verifyError, setVerifyError] = useState("");
   const [tweetError, setTweetError] = useState("");
   const [check, setCheck] = useState("");
+  const [sendEmail, setSendEmail] = useState({
+    email: "",
+  });
+  const [sendEmailError, setSendEmailError] = useState("");
+  const [sendEmailLoader, setSendEmailLoader] = useState(false);
+  const [email2, setEmail2] = useState(getEmail2());
+  const [sendConfirmInfor, setSendConfirmInfor] = useState({
+    password: "",
+    confirmpassword: "",
+    email: "",
+  });
+  const [sendConfirmError, setSendConfirmError] = useState("");
+  const [sendConfirmLoader, setSendConfirmLoader] = useState(false);
 
   // verifying a user from the frontend
 
@@ -214,6 +238,79 @@ export const UserContextWrapper = ({
     });
   };
 
+  const updateSendEmail = (event: ChangeEvent<HTMLInputElement>) => {
+    setSendEmail((prev) => {
+      return {
+        ...prev,
+        email: event.target.value,
+      };
+    });
+  };
+
+  const handleSendEmail = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSendEmailLoader(true);
+    setSendEmailError("");
+
+    const response = await PostRequest(
+      `${apiUrl}api/v1/user/send-email`,
+      JSON.stringify(sendEmail)
+    );
+
+    setSendEmailLoader(false);
+
+    if (response.error) {
+      return setSendEmailError(response.message);
+    }
+
+    setEmail2(response);
+
+    router.replace("/confirm");
+  };
+
+  const handleSendConfirm = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    setSendConfirmError("");
+    setSendConfirmLoader(true);
+
+    const response = await fetch(`${apiUrl}api/v1/user/confirm`, {
+      method: "put",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(sendConfirmInfor, email2),
+    });
+
+    const data = await response.json();
+
+    setSendConfirmLoader(false);
+
+    if (!response.ok) {
+      let message;
+      if (data.message) {
+        message = data.message;
+      }
+
+      setSendConfirmError(message);
+      return;
+    }
+
+    setUser(data);
+
+    router.replace("/verify-email-token");
+  };
+
+  const updateSendConfirm = (event: ChangeEvent<HTMLInputElement>) => {
+    setSendConfirmInfor((prev) => {
+      return {
+        ...prev,
+        [event.target.name]: event.target.value,
+        email: email2,
+      };
+    });
+  };
+
   // signing out a user
 
   const signout = () => {
@@ -224,6 +321,7 @@ export const UserContextWrapper = ({
   useEffect(() => {
     localStorage.setItem("user2", JSON.stringify(user));
     localStorage.setItem("dbToken", JSON.stringify(dbToken));
+    localStorage.setItem("email2", JSON.stringify(email2));
   }, [user]);
 
   return (
@@ -256,6 +354,14 @@ export const UserContextWrapper = ({
         tweetError,
         dbToken,
         check,
+        handleSendEmail,
+        updateSendEmail,
+        sendEmailError,
+        sendEmailLoader,
+        handleSendConfirm,
+        updateSendConfirm,
+        sendConfirmError,
+        sendConfirmLoader,
       }}
     >
       {children}

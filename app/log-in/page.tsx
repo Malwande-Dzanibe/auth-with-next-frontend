@@ -37,15 +37,16 @@ const LoginComponent = () => {
         <Link className="blue" href={"/update-password"}>
           <p>Forgot password?</p>
         </Link>
-        <section className="buttons-wrapper">
-          <button className="on-nav">
-            {logInLoading ? "Logging In ..." : "Log In"}
-          </button>
+
+        <button className="on-nav">
+          {logInLoading ? "Logging In ..." : "Log In"}
+        </button>
+        <div className="mid">
           <p>or</p>
           <Link className="blue" href={"/sign-up"}>
             Create Account
           </Link>
-        </section>
+        </div>
       </form>
     </div>
   );

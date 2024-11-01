@@ -29,6 +29,7 @@ nav {
   color: rgb(68, 68, 175);
   font-size: 12px;
   text-decoration: underline;
+  padding: 15px 0px;
 }
 
 .homie {
@@ -46,7 +47,7 @@ nav {
 button {
   background-color: var(--dark-pramary-color);
   padding: 5px 30px;
-  border-radius: 50px;
+  border-radius: 5px;
   color: var(--main-color);
 }
 
@@ -57,6 +58,14 @@ button {
 
   min-width: 20px;
   flex-direction: column;
+}
+
+.mid {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
 }
 
 .logo-wrapper p {

@@ -44,4 +44,12 @@ type ContextType = {
   tweetError: string;
   dbToken: string;
   check: string;
+  handleSendEmail: (event: FormEvent<HTMLFormElement>) => void;
+  updateSendEmail: (event: ChangeEvent<HTMLInputElement>) => void;
+  sendEmailError: string;
+  sendEmailLoader: boolean;
+  handleSendConfirm: (event: FormEvent<HTMLFormElement>) => void;
+  updateSendConfirm: (event: ChangeEvent<HTMLInputElement>) => void;
+  sendConfirmError: string;
+  sendConfirmLoader: boolean;
 };

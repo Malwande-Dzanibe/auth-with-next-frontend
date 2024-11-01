@@ -60,15 +60,16 @@ const SignUp = () => {
           required
           onChange={(e) => updateRegister(e)}
         />
-        <section className="buttons-wrapper">
-          <button className="on-nav">
-            {registerLoading ? "Creating Account ..." : "Create Account"}
-          </button>
+
+        <button className="on-nav">
+          {registerLoading ? "Creating Account ..." : "Create Account"}
+        </button>
+        <div className="mid">
           <p>or</p>
           <Link className="blue" href={"/log-in"}>
             Log In
           </Link>
-        </section>
+        </div>
       </form>
     </div>
   );
