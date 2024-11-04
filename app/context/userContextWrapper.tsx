@@ -265,7 +265,7 @@ export const UserContextWrapper = ({
 
     setEmail2(response);
 
-    router.replace("/confirm");
+    router.replace("/verify-email-token");
   };
 
   const handleSendConfirm = async (event: FormEvent<HTMLFormElement>) => {
