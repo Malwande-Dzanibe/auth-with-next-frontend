@@ -316,6 +316,7 @@ export const UserContextWrapper = ({
   const signout = () => {
     setUser(null);
     setDbToken("");
+    setEmail2("");
   };
 
   useEffect(() => {
@@ -362,6 +363,7 @@ export const UserContextWrapper = ({
         updateSendConfirm,
         sendConfirmError,
         sendConfirmLoader,
+        email2,
       }}
     >
       {children}

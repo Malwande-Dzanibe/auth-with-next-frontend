@@ -52,4 +52,5 @@ type ContextType = {
   updateSendConfirm: (event: ChangeEvent<HTMLInputElement>) => void;
   sendConfirmError: string;
   sendConfirmLoader: boolean;
+  email2: string;
 };
