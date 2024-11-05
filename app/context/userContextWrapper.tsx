@@ -263,6 +263,9 @@ export const UserContextWrapper = ({
       return setSendEmailError(response.message);
     }
 
+    console.log("below is the response from send-email route");
+    console.log(response);
+
     setEmail2(response);
 
     router.replace("/verify-email-token");
