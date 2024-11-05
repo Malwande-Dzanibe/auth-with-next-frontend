@@ -297,7 +297,7 @@ export const UserContextWrapper = ({
     }
 
     setUser(data);
-
+    localStorage.removeItem("email2");
     router.replace("/home");
   };
 
