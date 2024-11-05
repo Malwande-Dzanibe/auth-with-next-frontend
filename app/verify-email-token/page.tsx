@@ -26,6 +26,34 @@ const VerifyEmail = () => {
     setIsClient(true);
   }, [setIsClient]);
 
+  if (email2) {
+    return (
+      isClient && (
+        <div>
+          <div className="mess">
+            <p>{verifyError ? verifyError : null}</p>
+          </div>
+          <p style={{ color: "white", textAlign: "center" }}>{check}</p>
+          <form onSubmit={submitVerify}>
+            <input
+              type="text"
+              placeholder="email token"
+              name="emailToken"
+              required
+              onChange={(event) => updateVerify(event)}
+            />
+            <Link className="blue" href={"/verify-email-token"}>
+              <p>Resend Email Token?</p>
+            </Link>
+            <button disabled={loadingVerify}>
+              {loadingVerify ? "Verifying ..." : "Verify"}
+            </button>
+          </form>
+        </div>
+      )
+    );
+  }
+
   if (!user) {
     return (
       isClient && (
