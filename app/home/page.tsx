@@ -75,7 +75,7 @@ const HomeComponent = () => {
     );
   }
 
-  if (email2) {
+  if (email2 && !dbToken) {
     return (
       isClient && (
         <div>
