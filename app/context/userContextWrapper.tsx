@@ -329,9 +329,8 @@ export const UserContextWrapper = ({
   }, [user, email2]);
 
   const removeEmail = () => {
-    useEffect(() => {
-      localStorage.removeItem("email2");
-    }, [user, email2]);
+    setEmail2("");
+    localStorage.removeItem("email2");
   };
 
   return (
