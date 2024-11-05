@@ -297,7 +297,7 @@ export const UserContextWrapper = ({
     }
 
     setUser(data);
-    localStorage.removeItem("email2");
+    removeEmail();
     router.replace("/home");
   };
 
@@ -327,6 +327,12 @@ export const UserContextWrapper = ({
     localStorage.setItem("dbToken", JSON.stringify(dbToken));
     localStorage.setItem("email2", JSON.stringify(email2));
   }, [user, email2]);
+
+  const removeEmail = () => {
+    useEffect(() => {
+      localStorage.removeItem("email2");
+    }, [user, email2]);
+  };
 
   return (
     <context.Provider
