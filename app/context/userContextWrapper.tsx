@@ -298,7 +298,7 @@ export const UserContextWrapper = ({
 
     setUser(data);
 
-    router.replace("/verify-email-token");
+    router.replace("/home");
   };
 
   const updateSendConfirm = (event: ChangeEvent<HTMLInputElement>) => {
