@@ -78,7 +78,7 @@ const HomeComponent = () => {
     );
   }
 
-  if (user && email2) {
+  if (email2) {
     return (
       isClient && (
         <div>
