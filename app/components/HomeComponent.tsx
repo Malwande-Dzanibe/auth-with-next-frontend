@@ -25,6 +25,10 @@ const HomeComponent = () => {
     tweetError,
     dbToken,
     email2,
+    handleSendConfirm,
+    updateSendConfirm,
+    sendConfirmError,
+    sendConfirmLoader,
   } = useContext(context) as ContextType;
 
   const [allTweets, setAllTweets] = useState<TweetType[]>([]);
@@ -77,14 +81,31 @@ const HomeComponent = () => {
   if (user && email2) {
     return (
       isClient && (
-        <h1
-          style={{
-            color: "gray",
-            fontSize: "12px",
-          }}
-        >
-          This is where we going to change the password
-        </h1>
+        <div>
+          <div className="mess">
+            {sendConfirmError ? sendConfirmError : null}
+          </div>
+          <form onSubmit={handleSendConfirm}>
+            <input
+              type="password"
+              placeholder="new password"
+              name="password"
+              required
+              onChange={(event) => updateSendConfirm(event)}
+            />
+
+            <input
+              type="password"
+              placeholder="confirm password"
+              name="confirmpassword"
+              required
+              onChange={(event) => updateSendConfirm(event)}
+            />
+            <button className="on-nav">
+              {sendConfirmLoader ? "Sending..." : "Send"}
+            </button>
+          </form>
+        </div>
       )
     );
   }
