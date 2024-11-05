@@ -24,6 +24,7 @@ const HomeComponent = () => {
     post,
     tweetError,
     dbToken,
+    email2,
   } = useContext(context) as ContextType;
 
   const [allTweets, setAllTweets] = useState<TweetType[]>([]);
@@ -68,6 +69,21 @@ const HomeComponent = () => {
             Click here
           </Link>
           , to verify your account.
+        </h1>
+      )
+    );
+  }
+
+  if (user && email2) {
+    return (
+      isClient && (
+        <h1
+          style={{
+            color: "gray",
+            fontSize: "12px",
+          }}
+        >
+          This is where we going to change the password
         </h1>
       )
     );
