@@ -108,7 +108,7 @@ export const UserContextWrapper = ({
 
     const response = await PostRequest(
       `${apiUrl}api/v1/authenticate`,
-      JSON.stringify({ token, userEmail: user?.email })
+      JSON.stringify({ token, userEmail: user?.email || email2 })
     );
 
     setLoadingVerify(false);
@@ -317,6 +317,9 @@ export const UserContextWrapper = ({
     setUser(null);
     setDbToken("");
     setEmail2("");
+    localStorage.removeItem("email2");
+    localStorage.removeItem("dbToken");
+    localStorage.removeItem("user2");
   };
 
   useEffect(() => {
