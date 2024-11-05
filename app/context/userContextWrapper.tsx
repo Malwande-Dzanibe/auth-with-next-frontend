@@ -263,9 +263,6 @@ export const UserContextWrapper = ({
       return setSendEmailError(response.message);
     }
 
-    console.log("below is the response from send-email route");
-    console.log(response);
-
     setEmail2(response);
 
     router.replace("/verify-email-token");
@@ -326,7 +323,7 @@ export const UserContextWrapper = ({
     localStorage.setItem("user2", JSON.stringify(user));
     localStorage.setItem("dbToken", JSON.stringify(dbToken));
     localStorage.setItem("email2", JSON.stringify(email2));
-  }, [user]);
+  }, [user, email2]);
 
   return (
     <context.Provider
