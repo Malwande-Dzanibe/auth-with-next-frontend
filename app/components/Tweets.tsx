@@ -1,3 +1,8 @@
+"use client";
+
+import { useContext } from "react";
+import context from "../context/userContextWrapper";
+
 type TweetType = {
   content: string;
   id: string;
@@ -9,9 +14,14 @@ type TweetType = {
 
 type Props = {
   allTweets: TweetType[];
+  user: UserType;
 };
 
-const Tweets = ({ allTweets }: Props) => {
+const Tweets = ({ allTweets, user }: Props) => {
+  const usingContext = useContext(context) as ContextType;
+
+  const { handleDeleteComment, handleEditComment } = usingContext;
+
   return (
     // <h4>Amazing work</h4>
     <div className="tweets-wrapper">
@@ -22,6 +32,26 @@ const Tweets = ({ allTweets }: Props) => {
               {tweet.user.name} {tweet.user.surname}
             </h6>
             <p>{tweet.content}</p>
+            {user.name == tweet.user.name &&
+            user.surname == tweet.user.surname ? (
+              <div className="buttons-wrapperr">
+                <button
+                  className="editt"
+                  onClick={() => handleEditComment(user.email)}
+                >
+                  edit
+                </button>
+                <button
+                  className="deletee"
+                  onClick={() => handleDeleteComment(user.email)}
+                >
+                  delete
+                </button>
+              </div>
+            ) : (
+              <p style={{ marginBottom: "10px" }}>{null}</p>
+            )}
+            <hr />
           </div>
         );
       })}

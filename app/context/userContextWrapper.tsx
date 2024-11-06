@@ -311,6 +311,14 @@ export const UserContextWrapper = ({
     });
   };
 
+  const handleDeleteComment = (email: string) => {
+    console.log(email);
+  };
+
+  const handleEditComment = (email: string) => {
+    console.log("edited");
+  };
+
   // signing out a user
 
   const signout = () => {
@@ -372,6 +380,8 @@ export const UserContextWrapper = ({
         sendConfirmError,
         sendConfirmLoader,
         email2,
+        handleDeleteComment,
+        handleEditComment,
       }}
     >
       {children}

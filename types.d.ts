@@ -53,4 +53,6 @@ type ContextType = {
   sendConfirmError: string;
   sendConfirmLoader: boolean;
   email2: string;
+  handleDeleteComment: (email: string) => void;
+  handleEditComment: (email: string) => void;
 };

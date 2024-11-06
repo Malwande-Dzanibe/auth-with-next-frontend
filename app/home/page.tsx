@@ -164,7 +164,7 @@ const HomeComponent = () => {
           />
           <button type="submit">{postLoading ? "Posting..." : "Post"}</button>
         </form>
-        <Tweets allTweets={allTweets} />
+        <Tweets allTweets={allTweets} user={user} />
       </div>
     )
   );
