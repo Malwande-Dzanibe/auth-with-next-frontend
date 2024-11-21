@@ -18,7 +18,7 @@ export const UserContextWrapper = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  const apiUrl = "http://localhost:5000/";
+  const apiUrl = "https://custom-auth-backend.vercel.app/";
   // "https://custom-auth-backend.vercel.app/" || "http://localhost:5000/";
 
   const getUserLS = () => {
