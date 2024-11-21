@@ -6,15 +6,6 @@ import context from "../context/userContextWrapper";
 import Link from "next/link";
 import Tweets from "./Tweets";
 
-type TweetType = {
-  content: string;
-  id: string;
-  user: {
-    name: string;
-    surname: string;
-  };
-};
-
 const HomeComponent = () => {
   const {
     user,
@@ -41,14 +32,20 @@ const HomeComponent = () => {
     setIsClient(true);
   }, [isClient]);
 
+  if (loader && !user) {
+    return (
+      isClient && (
+        <div>
+          <p>SAWUBONA</p>
+        </div>
+      )
+    );
+  }
+
   if (loader) {
     return (
       isClient && (
         <div>
-          <h4 style={{ color: "red", fontSize: "12px" }}>
-            Thank You For Verifying Your Account And Thank You For Visiting This
-            Demo Project{" "}
-          </h4>
           {tweetError && (
             <h4 style={{ color: "red", fontSize: "12px", textAlign: "center" }}>
               {tweetError}
@@ -171,10 +168,6 @@ const HomeComponent = () => {
   return (
     isClient && (
       <div>
-        <h4 style={{ color: "red", fontSize: "12px" }}>
-          Thank You For Verifying Your Account And Thank You For Visiting This
-          Demo Project{" "}
-        </h4>
         {tweetError && (
           <h4 style={{ color: "red", fontSize: "12px", textAlign: "center" }}>
             {tweetError}

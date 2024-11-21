@@ -18,7 +18,7 @@ export const UserContextWrapper = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  const apiUrl = "https://custom-auth-backend.vercel.app/";
+  const apiUrl = "http://localhost:5000/";
   // "https://custom-auth-backend.vercel.app/" || "http://localhost:5000/";
 
   const getUserLS = () => {
@@ -103,6 +103,7 @@ export const UserContextWrapper = ({
   const [editingError, setEditError] = useState("");
   const [loader, setLoader] = useState(false);
   const [allTweets, setAllTweets] = useState<TweetType[]>([]);
+  const [refresh, setRefresh] = useState(false);
 
   // verifying a user from the frontend
 
@@ -126,7 +127,7 @@ export const UserContextWrapper = ({
     setUser(response.apiToken.user);
 
     setDbToken(response.jwtoken);
-    router.replace("/home");
+    router.replace("/");
   };
 
   // loging in a user from the frontend
@@ -224,6 +225,8 @@ export const UserContextWrapper = ({
         JSON.stringify(post),
         dbToken
       );
+
+      fetchTweets();
 
       setPost({
         content: "",
@@ -340,7 +343,7 @@ export const UserContextWrapper = ({
 
     setUser(data);
     removeEmail();
-    router.replace("/home");
+    router.replace("/");
   };
 
   const updateSendConfirm = (event: ChangeEvent<HTMLInputElement>) => {
@@ -358,6 +361,7 @@ export const UserContextWrapper = ({
       method: "delete",
     });
 
+    setRefresh(!refresh);
     fetchTweets();
     setPost({
       content: "",
@@ -397,8 +401,6 @@ export const UserContextWrapper = ({
     setAllTweets(data);
   };
 
-  console.log(allTweets);
-
   // signing out a user
 
   const signout = () => {
@@ -418,7 +420,7 @@ export const UserContextWrapper = ({
 
   useEffect(() => {
     fetchTweets();
-  }, []);
+  }, [refresh]);
 
   const removeEmail = () => {
     setEmail2("");
