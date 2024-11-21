@@ -32,26 +32,10 @@ const HomeComponent = () => {
     editingLoader,
     isEditing,
     loader,
+    allTweets,
   } = useContext(context) as ContextType;
 
-  const [allTweets, setAllTweets] = useState<TweetType[]>([]);
   const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    const getTweets = async () => {
-      const response = await fetch(
-        "https://custom-auth-backend.vercel.app/api/v1/user/tweets"
-      );
-
-      // "https://custom-auth-backend.vercel.app/" || "http://localhost:5000/";
-
-      const data = await response.json();
-
-      setAllTweets(data);
-    };
-
-    getTweets();
-  }, [post]);
 
   useEffect(() => {
     setIsClient(true);

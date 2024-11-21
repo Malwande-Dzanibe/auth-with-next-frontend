@@ -18,7 +18,7 @@ export const UserContextWrapper = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  const apiUrl = "http://localhost:5000/";
+  const apiUrl = "https://custom-auth-backend.vercel.app/";
   // "https://custom-auth-backend.vercel.app/" || "http://localhost:5000/";
 
   const getUserLS = () => {
@@ -102,6 +102,7 @@ export const UserContextWrapper = ({
   const [editingLoader, setEditingLoader] = useState(false);
   const [editingError, setEditError] = useState("");
   const [loader, setLoader] = useState(false);
+  const [allTweets, setAllTweets] = useState<TweetType[]>([]);
 
   // verifying a user from the frontend
 
@@ -393,8 +394,10 @@ export const UserContextWrapper = ({
 
     setLoader(false);
 
-    setPost(data);
+    setAllTweets(data);
   };
+
+  console.log(allTweets);
 
   // signing out a user
 
@@ -467,6 +470,7 @@ export const UserContextWrapper = ({
         editingError,
         isEditing,
         loader,
+        allTweets,
       }}
     >
       {children}

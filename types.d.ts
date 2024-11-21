@@ -82,4 +82,5 @@ type ContextType = {
   editingError: string;
   isEditing: boolean;
   loader: boolean;
+  allTweets: TweetType[];
 };
