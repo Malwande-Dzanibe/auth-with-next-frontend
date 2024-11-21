@@ -29,6 +29,9 @@ const HomeComponent = () => {
     updateSendConfirm,
     sendConfirmError,
     sendConfirmLoader,
+    editingLoader,
+    isEditing,
+    loader,
   } = useContext(context) as ContextType;
 
   const [allTweets, setAllTweets] = useState<TweetType[]>([]);
@@ -53,6 +56,43 @@ const HomeComponent = () => {
   useEffect(() => {
     setIsClient(true);
   }, [isClient]);
+
+  if (loader) {
+    return (
+      isClient && (
+        <div>
+          <h4 style={{ color: "red", fontSize: "12px" }}>
+            Thank You For Verifying Your Account And Thank You For Visiting This
+            Demo Project{" "}
+          </h4>
+          {tweetError && (
+            <h4 style={{ color: "red", fontSize: "12px", textAlign: "center" }}>
+              {tweetError}
+            </h4>
+          )}
+          <form onSubmit={sendTweets}>
+            <textarea
+              placeholder="Leave a comment"
+              name="content"
+              required
+              value={post.content}
+              onChange={(e) => updatePost(e)}
+            />
+            {isEditing ? (
+              <button type="submit">
+                {editingLoader ? "Editing..." : "Edit"}
+              </button>
+            ) : (
+              <button type="submit">
+                {postLoading ? "Posting..." : "Post"}
+              </button>
+            )}
+          </form>
+          <p>loading...</p>
+        </div>
+      )
+    );
+  }
 
   if (user && !dbToken) {
     return (
@@ -164,7 +204,13 @@ const HomeComponent = () => {
             value={post.content}
             onChange={(e) => updatePost(e)}
           />
-          <button type="submit">{postLoading ? "Posting..." : "Post"}</button>
+          {isEditing ? (
+            <button type="submit">
+              {editingLoader ? "Editing..." : "Edit"}
+            </button>
+          ) : (
+            <button type="submit">{postLoading ? "Posting..." : "Post"}</button>
+          )}
         </form>
         <Tweets allTweets={allTweets} user={user} />
       </div>

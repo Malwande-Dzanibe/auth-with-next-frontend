@@ -20,7 +20,11 @@ type Props = {
 const Tweets = ({ allTweets, user }: Props) => {
   const usingContext = useContext(context) as ContextType;
 
-  const { handleDeleteComment, handleEditComment } = usingContext;
+  const { handleDeleteComment, handleEditComment, loader } = usingContext;
+
+  if (loader) {
+    return <p>loading...</p>;
+  }
 
   return (
     // <h4>Amazing work</h4>
@@ -37,13 +41,13 @@ const Tweets = ({ allTweets, user }: Props) => {
               <div className="buttons-wrapperr">
                 <button
                   className="editt"
-                  onClick={() => handleEditComment(user.email)}
+                  onClick={() => handleEditComment(tweet)}
                 >
                   edit
                 </button>
                 <button
                   className="deletee"
-                  onClick={() => handleDeleteComment(user.email)}
+                  onClick={() => handleDeleteComment(tweet)}
                 >
                   delete
                 </button>

@@ -14,6 +14,15 @@ type TokenType = {
   userId: string;
 };
 
+type TweetType = {
+  content: string;
+  id: string;
+  user: {
+    name: string;
+    surname: string;
+  };
+};
+
 type ContextType = {
   user: UserType | null;
   sumbitLogin: FormEvent<HTMLFormElement>;
@@ -53,6 +62,24 @@ type ContextType = {
   sendConfirmError: string;
   sendConfirmLoader: boolean;
   email2: string;
-  handleDeleteComment: (email: string) => void;
-  handleEditComment: (email: string) => void;
+  handleDeleteComment: (tweet: {
+    content: string;
+    id: string;
+    user: {
+      name: string;
+      surname: string;
+    };
+  }) => void;
+  handleEditComment: (tweet: {
+    content: string;
+    id: string;
+    user: {
+      name: string;
+      surname: string;
+    };
+  }) => void;
+  editingLoader: boolean;
+  editingError: string;
+  isEditing: boolean;
+  loader: boolean;
 };

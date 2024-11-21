@@ -18,7 +18,7 @@ export const UserContextWrapper = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  const apiUrl = "https://custom-auth-backend.vercel.app/";
+  const apiUrl = "http://localhost:5000/";
   // "https://custom-auth-backend.vercel.app/" || "http://localhost:5000/";
 
   const getUserLS = () => {
@@ -97,6 +97,11 @@ export const UserContextWrapper = ({
   });
   const [sendConfirmError, setSendConfirmError] = useState("");
   const [sendConfirmLoader, setSendConfirmLoader] = useState(false);
+  const [editId, setEditId] = useState<string | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingLoader, setEditingLoader] = useState(false);
+  const [editingError, setEditError] = useState("");
+  const [loader, setLoader] = useState(false);
 
   // verifying a user from the frontend
 
@@ -176,23 +181,61 @@ export const UserContextWrapper = ({
   const sendTweets = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    setPostLoading(true);
-    setTweetError("");
+    if (isEditing) {
+      setEditingLoader(true);
+      setEditError("");
 
-    const response = await SendTweet(
-      `${apiUrl}api/v1/tweet`,
-      JSON.stringify(post),
-      dbToken
-    );
+      const response = await fetch(`${apiUrl}api/v1/tweet/edit/${editId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(post.content),
+      });
 
-    setPost({
-      content: "",
-    });
+      const data = await response.json();
 
-    setPostLoading(false);
+      if (!response.ok) {
+        let message;
+        if (data.message) {
+          message = data.message;
+          setEditError(message);
+          setEditingLoader(false);
+          return;
+        }
+      }
 
-    if (response.error) {
-      return setTweetError(response.message);
+      setEditingLoader(false);
+      console.log("did we get to this ");
+
+      console.log(response);
+
+      setPost({
+        content: "",
+      });
+      setIsEditing(false);
+      setEditId(null);
+    } else {
+      setPostLoading(true);
+      setLoader(true);
+      setTweetError("");
+
+      const response = await SendTweet(
+        `${apiUrl}api/v1/tweet`,
+        JSON.stringify(post),
+        dbToken
+      );
+
+      setPost({
+        content: "",
+      });
+
+      setPostLoading(false);
+      setLoader(false);
+
+      if (response.error) {
+        return setTweetError(response.message);
+      }
     }
   };
 
@@ -311,12 +354,43 @@ export const UserContextWrapper = ({
     });
   };
 
-  const handleDeleteComment = (email: string) => {
-    console.log(email);
+  const handleDeleteComment = async (tweet: TweetType) => {
+    fetch(`${apiUrl}api/v1/tweet/delete/${tweet.id}`, {
+      method: "delete",
+    });
+
+    fetchTweets();
   };
 
-  const handleEditComment = (email: string) => {
-    console.log("edited");
+  const handleEditComment = (tweet: TweetType) => {
+    setIsEditing(true);
+    setEditId(tweet.id);
+    setPost((prev) => {
+      return {
+        content: tweet.content,
+      };
+    });
+  };
+
+  const fetchTweets = async () => {
+    setLoader(true);
+
+    const response = await fetch(`${apiUrl}api/v1/user/tweets`);
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      let message;
+      if (data.message) {
+        message = data.message;
+        setTweetError(message);
+        return;
+      }
+    }
+
+    setLoader(false);
+
+    setPost(data);
   };
 
   // signing out a user
@@ -335,6 +409,10 @@ export const UserContextWrapper = ({
     localStorage.setItem("dbToken", JSON.stringify(dbToken));
     localStorage.setItem("email2", JSON.stringify(email2));
   }, [user, email2]);
+
+  useEffect(() => {
+    fetchTweets();
+  }, []);
 
   const removeEmail = () => {
     setEmail2("");
@@ -382,6 +460,10 @@ export const UserContextWrapper = ({
         email2,
         handleDeleteComment,
         handleEditComment,
+        editingLoader,
+        editingError,
+        isEditing,
+        loader,
       }}
     >
       {children}
