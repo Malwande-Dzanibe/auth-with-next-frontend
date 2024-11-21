@@ -96,6 +96,10 @@ button {
   font-size: 10px;
 }
 
+textarea {
+  padding: 5px;
+}
+
 .links-wrapper {
   display: flex;
 }

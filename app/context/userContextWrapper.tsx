@@ -185,12 +185,12 @@ export const UserContextWrapper = ({
       setEditingLoader(true);
       setEditError("");
 
-      const response = await fetch(`${apiUrl}api/v1/tweet/edit/${editId}`, {
-        method: "PUT",
+      const response = await fetch(`${apiUrl}api/v1/tweet/editt/${editId}`, {
+        method: "put",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(post.content),
+        body: JSON.stringify(post),
       });
 
       const data = await response.json();
@@ -206,10 +206,8 @@ export const UserContextWrapper = ({
       }
 
       setEditingLoader(false);
-      console.log("did we get to this ");
 
-      console.log(response);
-
+      fetchTweets();
       setPost({
         content: "",
       });
@@ -360,6 +358,11 @@ export const UserContextWrapper = ({
     });
 
     fetchTweets();
+    setPost({
+      content: "",
+    });
+    setEditId(null);
+    setIsEditing(false);
   };
 
   const handleEditComment = (tweet: TweetType) => {
